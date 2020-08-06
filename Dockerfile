@@ -4,10 +4,11 @@ LABEL Maintainer="AzurCrystal"
 
 ARG PUID=1000
 
+ENV TZ="Asia/Shanghai"
+
 RUN set -x \
-    && sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' >/etc/timezone \
+    && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && echo ${TZ} >/etc/timezone \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
         wget \
